@@ -12,7 +12,7 @@ O <strong>Store Management</strong> é uma aplicação web que permite ao usuár
     <li>Bootstrap 4</li>
 </ul>
 
-<h2>Instruções<h2>
+<h2>Instruções</h2>
 <p>Dentro do diretório do projeto execute os seguintes comandos:</p>
 
 <ul>
