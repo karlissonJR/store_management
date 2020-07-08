@@ -16,7 +16,6 @@ O <strong>Store Management</strong> é uma aplicação web que permite ao usuár
 <p>Dentro do diretório do projeto execute os seguintes comandos:</p>
 
 <ul>
-    <li>python manage.py makemigrations</li>
     <li>python manage.py migrate</li>
     <li>python manage.py runserver</li>
 </ul>
