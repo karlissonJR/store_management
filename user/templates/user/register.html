@@ -1,0 +1,68 @@
+{% extends 'base_login.html' %}
+
+{% block content %}
+
+<div class="page-header header-filter" style="background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+            <div class="card card-login">
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <div class="card-header card-header-primary text-center">
+                <h4 class="card-title">Paǵina de</h4>
+                <h4 class="card-title">Cadastro</h4>
+                </div>
+                <p class="description text-center"><a href="{% url 'user:login' %}">Clique Aqui</a> para ir à página de login</p>
+                <div class="card-body">
+                    {% for field in form %}
+                        <div class="input-group">
+                            {% if field.name == 'username' %}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                {% for error in field.errors %}
+                                    <label for="{field.id_for_label}" class="bmd-label-floating">{{ error }}</label>
+                                {% endfor %}
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="{{field.id_for_label}}"
+                                    value="{{field.value|default_if_none:''}}"
+                                    name="{{field.name}}"
+                                    placeholder="{{field.label}}" 
+                                />
+                            {% else %}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">lock_outline</i>
+                                    </span>
+                                </div>
+                                {% for error in field.errors %}
+                                    <label for="{field.id_for_label}" class="bmd-label-floating">{{ error }}</label>
+                                {% endfor %}
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="{{field.id_for_label}}"
+                                    value="{{field.value|default_if_none:''}}"
+                                    name="{{field.name}}"
+                                    placeholder="{{field.label}}" 
+                                />
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="footer text-center">
+                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Cadastrar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

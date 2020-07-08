@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    {% if product %}
+        <h1>Atualizar Produto</h1>
+    {% else %}
+        <h1>Novo Produto</h1>
+    {% endif %}
+
+    {% if product and product.user.id != user.id %}
+        <h2>Você não pode editar este produto</h2>
+    {% else %}
+    <form method="POST">
+    {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                {% if field.name == 'price' %}
+                    <label for="{{field.name}}">{{field.label}}</label>
+                    <input oninput="replaceAllComma()" type="text" class="form-control" id="{{field.id_for_label}}" value="{{field.value|default_if_none:''}}" name="{{field.name}}">
+                {% else %}
+                    <label for="{{field.name}}">{{field.label}}</label>
+                    <input type="text" class="form-control" id="{{field.id_for_label}}" value="{{field.value|default_if_none:''}}" name="{{field.name}}">
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="alert alert-warning">
+                        <strong>{{ error }}</strong>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        
+        <a href="{% url 'product:list_products' %}" class="btn btn-danger">Cancelar</a>
+        
+    </form>
+    {% endif %}
+</div>
+
+<script src="{% static 'product/js/app.js' %}"></script>
+
+{% endblock %}
